@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="368071bd-4aa6-4aa2-ad90-6c9c8723e9bb" >
+		<http:listener-connection host="0.0.0.0" port="8082" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="24f04d06-a6bb-4aa2-9b9d-916ae6a11204" basePath="/api/timezone" >
+		<http:request-connection host="worldtimeapi.org" />
+	</http:request-config>
+	<flow name="worldtimezoneFlow" doc:id="b0106391-0d43-465d-b4e7-42e462d307b7" >
+		<http:listener doc:name="Listener" doc:id="9683ff55-abff-4012-a1cb-f8b09a9f5edf" config-ref="HTTP_Listener_config" path="/api/timeZone/{continent}/{region}">
+			<http:response >
+				<http:headers ><![CDATA[#[output application/java
+---
+{
+	"transactionPlace" : "India"
+}]]]></http:headers>
+			</http:response>
+		</http:listener>
+		<http:request method="GET" doc:name="Request" doc:id="27447307-6d26-4aae-82fa-87257b8c6820" config-ref="HTTP_Request_configuration" path="/{continent}/{region}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"continent" : attributes.uriParams.continent,
+	"region" : attributes.uriParams.region
+}]]]></http:uri-params>
+
+		</http:request>
+	</flow>
+</mule>
