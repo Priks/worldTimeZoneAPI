@@ -39,6 +39,7 @@
 						<applicationName>worldtimezone-priks</applicationName>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<environment>Sandbox</environment>
+						<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
 				</configuration>
 			</plugin>
