@@ -32,12 +32,14 @@
 				<configuration>
 					<cloudHubDeployment>
 						<username>Squid123</username>
-						<environment>Sandbox</environment>
-						<workers>1</workers>
-						<workerType>Micro</workerType>
 						<password>Colgate@40</password>
-						<applicationName>worldtimezone-service</applicationName>
 						<muleVersion>4.3.0</muleVersion>
+						<workers>1</workers>
+						<workerType>MICRO</workerType>
+						<applicationName>worldtimezone-priks</applicationName>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<environment>Sandbox</environment>
+						<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
 				</configuration>
 			</plugin>
